@@ -4,7 +4,7 @@ const apiKey = "t5spL8Mpi82G9CWfX2hbg2k33EA95Mhy2EE7qpLb";
 const webhookSecretKey = "1f9ae895-3777-46d2-b9bf-485f6eacb927";
 
 // Replace the following line with the Webhook.site URL
-const webhookSiteUrl = "https://webhook.site/2f84286d-ed79-4a5d-bc3b-5f468ea77e6d"; 
+const webhookSiteUrl = "https://api-stripe-test-jt2f-hbbqskohj-ainamkozs-projects.vercel.app/api/webhook"; 
 
 module.exports = async (req, res) => {
     if (req.method === 'GET') {
