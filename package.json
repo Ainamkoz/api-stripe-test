@@ -2,14 +2,13 @@
   "name": "api-stripe-test",
   "version": "1.0.0",
   "description": "Test webhook",
-  "main": "webhook.js", 
+  "main": "app/webhook.js",
   "scripts": {
-    "start": "node app webhook.js" // Adjust this command based on how you start your application
+    "start": "node app/webhook.js" // Adjust this command based on how you start your application
   },
   "author": "AINA",
-  "license": "MIT", // Choose the appropriate license for your project
+  "license": "MIT",
   "dependencies": {
-    "crypto": "^1.0.1", // Add any other dependencies your project uses
-    // Add other dependencies as needed
+    "crypto": "^1.0.1"
   }
 }
