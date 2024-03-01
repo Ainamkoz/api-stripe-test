@@ -2,9 +2,9 @@
   "name": "api-stripe-test",
   "version": "1.0.0",
   "description": "Test webhook",
-  "main": "app/webhook.js",
+  "main": "api/webhook.js",
   "scripts": {
-    "start": "node app/webhook.js" 
+    "start": "node api/webhook.js"
   },
   "author": "AINA",
   "license": "MIT"
