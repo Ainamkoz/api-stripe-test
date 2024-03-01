@@ -1,12 +1,17 @@
+const express = require('express');
+const app = express();
+
 const crypto = require('crypto');
 
 const apiKey = "t5spL8Mpi82G9CWfX2hbg2k33EA95Mhy2EE7qpLb";
 const webhookSecretKey = "1f9ae895-3777-46d2-b9bf-485f6eacb927";
 
 // Replace the following line with the Webhook.site URL
-const webhookSiteUrl = "https://api-stripe-test-v65j.vercel.app/api/webhook"; 
+const webhookSiteUrl = "https://api-stripe-test-v65j.vercel.app/api/webhook";
 
-module.exports = async (req, res) => {
+app.use(express.json()); // Parse JSON payloads
+
+app.post('/api/webhook', async (req, res) => {
     if (req.method === 'GET') {
         console.log('GET request received');
         return res.status(200).send("GET request received successfully");
@@ -16,8 +21,8 @@ module.exports = async (req, res) => {
     // Example: const webhookSiteUrl = "https://webhook.site/your-unique-id";
     // Use the 'webhookSiteUrl' variable in place of a hardcoded URL
 
-    const signature = req.headers['X-Signature'];
-    const apiKeyHeader = req.headers['X-API-Key'];
+    const signature = req.headers['x-signature'];
+    const apiKeyHeader = req.headers['x-api-key'];
 
     // Additional logs
     console.log('Received Headers:', req.headers);
@@ -41,7 +46,7 @@ module.exports = async (req, res) => {
     handleWebhookData(data);
 
     return res.status(200).send("Webhook received successfully");
-};
+});
 
 function verifySignature(data, signature, secretKey) {
     const stringifiedData = JSON.stringify(data);
@@ -52,3 +57,9 @@ function verifySignature(data, signature, secretKey) {
 function handleWebhookData(data) {
     console.log('Webhook Data:', data);
 }
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
