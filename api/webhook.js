@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 
-const webhookSecretKey = process.env.API_KEY;
+const webhookSecretKey = process.env.WEBHOOK_KEY;
 
 module.exports = async (req, res) => {
     const signature = req.headers['x-signature'];
