@@ -1,18 +1,12 @@
 const crypto = require('crypto');
 
-const apiKey = "t5spL8Mpi82G9CWfX2hbg2k33EA95Mhy2EE7qpLb";
-const webhookSecretKey = "1f9ae895-3777-46d2-b9bf-485f6eacb927";
+const webhookSecretKey = process.env.API_KEY;
 
 module.exports = async (req, res) => {
     const signature = req.headers['x-signature'];
-    const apiKeyHeader = req.headers['x-api-key'];
 
     if (!signature) {
         return res.status(400).send("Missing X-Signature header");
-    }
-
-    if (!apiKeyHeader || apiKeyHeader !== apiKey) {
-        return res.status(401).send("Invalid API key");
     }
 
     const data = req.body;
