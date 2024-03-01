@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "api-stripe-test/app/webhook.js", "use": "@now/node" }
+  ],
+  "routes": [
+    { "src": "/api/webhook", "dest": "api-stripe-test/app/webhook.js" }
+  ]
+}
