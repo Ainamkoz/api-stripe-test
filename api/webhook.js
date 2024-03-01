@@ -21,16 +21,15 @@ module.exports = async (req, res) => {
         return res.status(401).send("Invalid signature");
     }
 
-    // Your actions with Stripe data
-    const stripeResponse = handleStripeWebhookData(data);
+    // Extracting amount, currency, and status from the request body
+    const { amount, currency, status } = extractDataFromRequestBody(data);
 
-    // Your actions with your code
-    handleWebhookData(data);
-
-    // Return additional data in the response
+    // Return the extracted data in the response
     const responsePayload = {
         status: "Webhook received successfully!",
-        stripeResponse
+        amount,
+        currency,
+        status
     };
 
     return res.status(200).json(responsePayload);
@@ -42,25 +41,8 @@ function verifySignature(data, signature, secretKey) {
     return crypto.timingSafeEqual(Buffer.from(signature, 'hex'), Buffer.from(hashed, 'hex'));
 }
 
-function handleStripeWebhookData(data) {
-    // Handling Stripe data
-    if (data.type === 'payment_intent.succeeded') {
-        const paymentIntent = data.data.object;
-        const amount = paymentIntent.amount;
-        const status = paymentIntent.status;
-
-        // Your actions with amount and status, e.g., log or database
-        console.log('Stripe Webhook Data:', { amount, status });
-
-        // Return data for the response
-        return { amount, status };
-    }
-
-    // Return default response if not handling this specific event
-    return { message: 'Not handling this Stripe event' };
-}
-
-function handleWebhookData(data) {
-    // Handling your data
-    console.log('Webhook Data:', data);
+function extractDataFromRequestBody(data) {
+    // Assuming the data is a JSON object with amount, currency, and status
+    const { amount, currency, status } = data;
+    return { amount, currency, status };
 }
