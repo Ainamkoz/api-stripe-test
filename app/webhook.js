@@ -4,6 +4,11 @@ const apiKey = "t5spL8Mpi82G9CWfX2hbg2k33EA95Mhy2EE7qpLb";
 const webhookSecretKey = "1f9ae895-3777-46d2-b9bf-485f6eacb927";
 
 module.exports = async (req, res) => {
+    if (req.method === 'GET') {
+        console.log('GET request received');
+        return res.status(200).send("GET request received successfully");
+    }
+
     const signature = req.headers['X-Signature'];
     const apiKeyHeader = req.headers['X-API-Key'];
 
