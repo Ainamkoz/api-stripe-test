@@ -7,8 +7,5 @@
     "start": "node app/webhook.js" 
   },
   "author": "AINA",
-  "license": "MIT",
-   "dependencies": {
-     "crypto" 
-  }
+  "license": "MIT"
 }
