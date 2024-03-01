@@ -21,9 +21,13 @@ module.exports = async (req, res) => {
         return res.status(401).send("Invalid signature");
     }
 
+    // Your actions with Stripe data
+    handleStripeWebhookData(data);
+
+    // Your actions with your code
     handleWebhookData(data);
 
-    return res.status(200).send("Webhook received successfully");
+    return res.status(200).send("Webhook received successfully!");
 };
 
 function verifySignature(data, signature, secretKey) {
@@ -32,6 +36,19 @@ function verifySignature(data, signature, secretKey) {
     return crypto.timingSafeEqual(Buffer.from(signature, 'hex'), Buffer.from(hashed, 'hex'));
 }
 
+function handleStripeWebhookData(data) {
+    // Handling Stripe data
+    if (data.type === 'payment_intent.succeeded') {
+        const paymentIntent = data.data.object;
+        const amount = paymentIntent.amount;
+        const status = paymentIntent.status;
+
+        // Your actions with amount and status, e.g., log or database
+        console.log('Stripe Webhook Data:', { amount, status });
+    }
+}
+
 function handleWebhookData(data) {
+    // Handling your data
     console.log('Webhook Data:', data);
 };
