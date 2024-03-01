@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "app/webhook.js", "use": "@now/node" }
+  ],
+  "routes": [
+    { "src": "/api/webhook", "dest": "app/webhook.js" }
+  ]
+}
