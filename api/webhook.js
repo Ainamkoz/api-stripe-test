@@ -22,12 +22,18 @@ module.exports = async (req, res) => {
     }
 
     // Your actions with Stripe data
-    handleStripeWebhookData(data);
+    const stripeResponse = handleStripeWebhookData(data);
 
     // Your actions with your code
     handleWebhookData(data);
 
-    return res.status(200).send("Webhook received successfully!");
+    // Return additional data in the response
+    const responsePayload = {
+        status: "Webhook received successfully!",
+        stripeResponse
+    };
+
+    return res.status(200).json(responsePayload);
 };
 
 function verifySignature(data, signature, secretKey) {
@@ -45,10 +51,16 @@ function handleStripeWebhookData(data) {
 
         // Your actions with amount and status, e.g., log or database
         console.log('Stripe Webhook Data:', { amount, status });
+
+        // Return data for the response
+        return { amount, status };
     }
+
+    // Return default response if not handling this specific event
+    return { message: 'Not handling this Stripe event' };
 }
 
 function handleWebhookData(data) {
     // Handling your data
     console.log('Webhook Data:', data);
-};
+}
