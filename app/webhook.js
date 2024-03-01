@@ -9,8 +9,8 @@ module.exports = async (req, res) => {
         return res.status(200).send("GET request received successfully");
     }
 
-    const signature = req.headers['X-Signature'];
-    const apiKeyHeader = req.headers['X-API-Key'];
+    const signature = req.headers['x-signature'];
+    const apiKeyHeader = req.headers['x-api-key']; 
 
     if (!signature) {
         return res.status(400).send("Missing X-Signature header");
@@ -39,4 +39,4 @@ function verifySignature(data, signature, secretKey) {
 
 function handleWebhookData(data) {
     console.log('Webhook Data:', data);
-};
+}
