@@ -4,11 +4,8 @@
   "description": "Test webhook",
   "main": "app/webhook.js",
   "scripts": {
-    "start": "node app/webhook.js"
+    "start": "node app/webhook.js" 
   },
   "author": "AINA",
-  "license": "MIT",
-  "dependencies": {
-    "crypto": "^1.0.1"
-  }
+  "license": "MIT"
 }
