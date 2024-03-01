@@ -4,7 +4,7 @@
   "description": "Test webhook",
   "main": "app/webhook.js",
   "scripts": {
-    "start": "node app/webhook.js" // Adjust this command based on how you start your application
+    "start": "node app/webhook.js"
   },
   "author": "AINA",
   "license": "MIT",
