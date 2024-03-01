@@ -18,7 +18,12 @@ module.exports = async (req, res) => {
     // Extracting amount, currency, and status from the request body
     const { amount, currency, status } = extractDataFromRequestBody(data);
 
-    // Return the extracted data in the response
+    // Handle the case where the data might not be present or in the expected format
+    if (amount === undefined || currency === undefined || status === undefined) {
+        return res.status(400).json({ error: "Invalid request body format" });
+    }
+
+    // Return the extracted data in the response payload
     const responsePayload = {
         status: "Webhook received successfully!",
         amount,
